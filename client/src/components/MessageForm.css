@@ -1,0 +1,92 @@
+/* client/src/components/MessageForm.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #d1e6f8; /* Light background color */
+    border-radius: 10px;
+    height: fit-content; /* Full height of viewport */
+}
+
+.encryption-section,
+.decryption-section {
+    height:fit-content;
+    flex: 1; /* Take equal space */
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #eca3a3; /* White background for sections */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+h2 {
+    color: #2f6318; /* Tomato color for headings */
+}
+
+button {
+    background-color: #954caf; /* Green button */
+    color: white;
+    padding: 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Full width for buttons */
+}
+
+button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+textarea {
+    height: auto;
+    width: 98%; /* Full width for text areas */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    resize: none; /* Disable resizing */
+    font-size: 16px; /* Increase font size for readability */
+}
+
+textarea:focus {
+    border-color: #4caf50; /* Change border color on focus */
+    outline: none; /* Remove outline */
+}
+
+p {
+    color: #333; /* Darker text color for output */
+}
+
+pre {
+    background-color: #f9f9f9; /* Light background for key display */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack sections vertically */
+    }
+
+    
+}
+
+#cipher{
+    font-size: 20px;      /* Set the font size to 20px */
+    width: auto;          /* Allow the width to be determined by the content */
+    word-wrap: break-word; /* Enable wrapping for long words */
+    overflow-wrap: break-word; /* Break long words if necessary */
+    white-space: normal;   /* Allow text to wrap to the next line */
+    margin: 0;            /* Optional: Remove default margin for better control */
+}
+.e{
+    height: 166px;
+}
