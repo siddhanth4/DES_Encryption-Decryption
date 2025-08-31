@@ -1,14 +1,14 @@
 
-# DES Encryption-Decryption Tool
+# Encryption-Decryption Tool
 
-This project is a **Data Encryption Standard (DES) Encryption/Decryption Tool** built with **React**. It provides a simple web interface to encrypt and decrypt messages using the DES algorithm. The project aims to demonstrate the implementation of DES in a user-friendly way.
+This project is a **Encryption & Decryption Tool** built with **React**. It provides a simple web interface to encrypt and decrypt messages using the DES, AES & Blowfish algorithm. The project aims to demonstrate the implementation of Symmetric Cryptography in a user-friendly way.
 
 ## Technologies Used
 
 - **React**: JavaScript library for building user interfaces
 - **JavaScript (ES6+)**: Core programming language
 - **CSS**: Styling for the app
-- **DES Algorithm**: The core encryption and decryption functionality is implemented using JavaScript.
+- **Encryption & Decryption Algorithm**: The core encryption and decryption functionality is implemented using JavaScript.
 
 
 ### Installation
@@ -53,5 +53,6 @@ This project is a **Data Encryption Standard (DES) Encryption/Decryption Tool** 
 ## Screenshots
 ![image](https://github.com/user-attachments/assets/7534c49d-72a0-49f8-8498-3017e79ec624)
 ![image](https://github.com/user-attachments/assets/37729f84-35f3-456f-811f-325be4b70c54)
+
 
 
