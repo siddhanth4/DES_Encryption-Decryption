@@ -1,46 +1,85 @@
-// server/routes/messages.js
 const express = require('express');
 const router = express.Router();
 const CryptoJS = require('crypto-js');
 
-// Function to generate a random secret key for DES encryption
-const generateKey = () => {
-    return CryptoJS.lib.WordArray.random(64 / 8).toString();
+// ================== KEY GENERATORS ==================
+const generateKey = (algorithm) => {
+  switch (algorithm) {
+    case 'DES': return CryptoJS.lib.WordArray.random(64 / 8).toString();
+    case 'AES': return CryptoJS.lib.WordArray.random(128 / 8).toString();
+    case 'Blowfish': return CryptoJS.lib.WordArray.random(128 / 8).toString();
+    default: return null;
+  }
 };
 
-// Function to encrypt a message using DES
-const encryptMessage = (text, secretKey) => {
-    return CryptoJS.DES.encrypt(text, secretKey).toString();
+// ================== ENCRYPT FUNCTIONS ==================
+const encryptMessage = (text, secretKey, algorithm) => {
+  switch (algorithm) {
+    case 'DES':
+      return CryptoJS.DES.encrypt(text, secretKey).toString();
+    case 'AES':
+      return CryptoJS.AES.encrypt(text, secretKey).toString();
+    case 'Blowfish':
+      return CryptoJS.Blowfish.encrypt(text, secretKey).toString();
+    default:
+      throw new Error('Unsupported algorithm for symmetric encrypt');
+  }
 };
 
-// Function to decrypt a message using DES
-const decryptMessage = (encryptedText, secretKey) => {
-    const bytes = CryptoJS.DES.decrypt(encryptedText, secretKey);
-    return bytes.toString(CryptoJS.enc.Utf8);
+// ================== DECRYPT FUNCTIONS ==================
+const decryptMessage = (encryptedText, secretKey, algorithm) => {
+  switch (algorithm) {
+    case 'DES':
+      return CryptoJS.DES.decrypt(encryptedText, secretKey).toString(CryptoJS.enc.Utf8);
+    case 'AES':
+      return CryptoJS.AES.decrypt(encryptedText, secretKey).toString(CryptoJS.enc.Utf8);
+    case 'Blowfish':
+      return CryptoJS.Blowfish.decrypt(encryptedText, secretKey).toString(CryptoJS.enc.Utf8);
+    default:
+      throw new Error('Unsupported algorithm for symmetric decrypt');
+  }
 };
 
-// POST request to encrypt a message
+// ================== ENCRYPT ROUTE ==================
 router.post('/encrypt', (req, res) => {
-    const { plainText } = req.body;
-    const secretKey = generateKey(); // Generate a random secret key for encryption
-    const encryptedText = encryptMessage(plainText, secretKey); // Encrypt the message
+  const { plainText, algorithm } = req.body;
 
-    // Return the encrypted text and the key
+  try {
+    const secretKey = generateKey(algorithm);
+    const encryptedText = encryptMessage(plainText, secretKey, algorithm);
+
     res.status(200).json({
-        encryptedText,
-        secretKey,
+      encryptedText,
+      secretKey,
+      algorithm, 
     });
+  } catch (err) {
+    console.error('Encrypt error:', err.message);
+    res.status(400).json({ error: 'Encryption failed' });
+  }
 });
 
-// POST request to decrypt a message
+// ================== DECRYPT ROUTE ==================
 router.post('/decrypt', (req, res) => {
-    const { encryptedText, secretKey } = req.body;
-    try {
-        const decryptedText = decryptMessage(encryptedText, secretKey); // Decrypt the message
-        res.status(200).json({ decryptedText });
-    } catch (error) {
-        res.status(400).json({ error: 'Invalid Key or Cipher text' });
+  const { encryptedText, secretKey, algorithm, originalAlgorithm } = req.body;
+
+  try {
+    // Check for algorithm mismatch
+    if (originalAlgorithm && originalAlgorithm !== algorithm) {
+      return res.status(400).json({ errorType: 'algorithm', error: 'Select Correct Algorithm' });
     }
+
+    const decryptedText = decryptMessage(encryptedText, secretKey, algorithm);
+
+    if (!decryptedText) {
+      return res.status(400).json({ errorType: 'key', error: 'Wrong key or ciphertext.' });
+    }
+
+    res.status(200).json({ decryptedText });
+  } catch (error) {
+    console.error('Decrypt error:', error.message);
+    res.status(400).json({ errorType: 'key', error: 'Wrong key or ciphertext.' });
+  }
 });
 
 module.exports = router;
