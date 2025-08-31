@@ -1,92 +1,187 @@
-/* client/src/components/MessageForm.css */
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #8b0bf3, #66ffeb);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 10px; /* prevents overflow on small screens */
+  box-sizing: border-box;
+  overflow-x: hidden; /* avoid sideways scroll on small devices */
 }
 
-.container {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    background-color: #d1e6f8; /* Light background color */
-    border-radius: 10px;
-    height: fit-content; /* Full height of viewport */
+.form-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 1200px;
+  width: 100%;
 }
 
-.encryption-section,
-.decryption-section {
-    height:fit-content;
-    flex: 1; /* Take equal space */
-    margin: 10px;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    background-color: #eca3a3; /* White background for sections */
-    overflow-y: auto; /* Allow scrolling if content overflows */
+.card {
+  flex: 1;
+  min-width: 300px; /* safe for small tablets */
+  max-width: 100%; /* prevents overflow */
+  padding: 25px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease;
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.02);
+}
+
+.encryption-card {
+  border-left: 6px solid #4cafef;
+}
+
+.decryption-card {
+  border-left: 6px solid #f36c6c;
+}
+
+/* 3D Responsive Heading */
+h1.app-heading {
+  font-size: clamp(2rem, 8vw, 4.5rem); /* responsive scaling */
+  font-weight: 900;
+  text-align: center;
+  margin: 20px 0 40px;
+  color: #fff;
+  letter-spacing: 2px;
+  line-height: 1.2;
+  text-shadow:
+    2px 2px 0 #000,
+    4px 4px 0 #444,
+    6px 6px 0 #666,
+    8px 8px 0 #999;
 }
 
 h2 {
-    color: #2f6318; /* Tomato color for headings */
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
 }
 
-button {
-    background-color: #954caf; /* Green button */
-    color: white;
-    padding: 20px;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%; /* Full width for buttons */
+label {
+  font-weight: bold;
+  display: block;
+  margin-top: 10px;
 }
 
-button:hover {
-    background-color: #45a049; /* Darker green on hover */
-}
-
+select,
 textarea {
-    height: auto;
-    width: 98%; /* Full width for text areas */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    resize: none; /* Disable resizing */
-    font-size: 16px; /* Increase font size for readability */
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  outline: none;
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
 }
 
-textarea:focus {
-    border-color: #4caf50; /* Change border color on focus */
-    outline: none; /* Remove outline */
+/* Auto-expanding textareas */
+textarea.input-area {
+  min-height: 100px;
+  resize: none; /* user cannot drag */
+  overflow: hidden; /* hide scrollbars */
+  line-height: 1.5;
+  word-wrap: break-word;
 }
 
-p {
-    color: #333; /* Darker text color for output */
+/* --- JS helper will auto-expand --- */
+textarea.input-area:focus,
+textarea.input-area:active {
+  overflow: hidden;
 }
 
-pre {
-    background-color: #f9f9f9; /* Light background for key display */
-    padding: 10px;
-    border-radius: 5px;
+/* Buttons */
+.glow-button {
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  box-shadow: 0 0 20px rgba(102, 126, 234, 0.6);
 }
 
-/* Responsive Styles */
+.glow-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(102, 126, 234, 0.9);
+}
+
+.glow-button.red {
+  background: linear-gradient(90deg, #ff6a6a, #ee0979);
+  box-shadow: 0 0 20px rgba(255, 106, 106, 0.6);
+}
+
+.glow-button.red:hover {
+  box-shadow: 0 0 30px rgba(255, 106, 106, 0.9);
+}
+
+/* Results */
+.result-box {
+  margin-top: 20px;
+  padding: 15px;
+  background: #f1f1f1;
+  border-radius: 10px;
+  font-size: 16px;
+  word-wrap: break-word;
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.result-box.success {
+  background: #e6ffe6;
+  border-left: 5px solid #28a745;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.note {
+  font-size: 13px;
+  color: #555;
+  text-align: center;
+}
+
+/* Responsive Tweaks */
 @media (max-width: 768px) {
-    .container {
-        flex-direction: column; /* Stack sections vertically */
-    }
+  .form-container {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px;
+  }
 
-    
-}
+  .card {
+    min-width: 100%;
+    padding: 20px;
+  }
 
-#cipher{
-    font-size: 20px;      /* Set the font size to 20px */
-    width: auto;          /* Allow the width to be determined by the content */
-    word-wrap: break-word; /* Enable wrapping for long words */
-    overflow-wrap: break-word; /* Break long words if necessary */
-    white-space: normal;   /* Allow text to wrap to the next line */
-    margin: 0;            /* Optional: Remove default margin for better control */
-}
-.e{
-    height: 166px;
+  h1.app-heading {
+    margin: 10px 0 25px;
+    font-size: clamp(1.8rem, 9vw, 3rem);
+  }
+
+  .glow-button {
+    font-size: 15px;
+    padding: 12px;
+  }
 }

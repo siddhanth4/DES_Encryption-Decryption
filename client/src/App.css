@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+
+.app-heading {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+  margin-top: 20px;
+
+  /* 3D effect */
+  text-shadow: 
+    1px 1px 0px #000,
+    2px 2px 0px #444,
+    3px 3px 0px #666,
+    4px 4px 0px #999,
+    5px 5px 0px #bbb;
+}
+
