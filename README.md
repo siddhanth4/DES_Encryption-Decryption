@@ -16,13 +16,13 @@ This project is a **Encryption & Decryption Tool** built with **React**. It prov
 1. Clone the repo:
 
    ```bash
-   git clone https://github.com/siddhanth4/DES_Encryption-Decryption.git
+   git clone https://github.com/siddhanth4/Encryption-Decryption-Tool.git
    ```
 
 2. Navigate to the project directory:
 
    ```bash
-   cd DES_Encryption-Decryption
+   cd Encryption-Decryption-Tool
    ```
 
 3. Install dependencies:
@@ -53,6 +53,7 @@ This project is a **Encryption & Decryption Tool** built with **React**. It prov
 ## Screenshots
 <img width="1231" height="682" alt="image" src="https://github.com/user-attachments/assets/53e512a2-b56d-4f1d-b2b8-bc386a6bbc4f" />
 <img width="1131" height="624" alt="image" src="https://github.com/user-attachments/assets/14d54a4f-9e16-4654-b91c-af4c3814e922" />
+
 
 
 
