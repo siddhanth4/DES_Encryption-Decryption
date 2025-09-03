@@ -51,8 +51,9 @@ This project is a **Encryption & Decryption Tool** built with **React**. It prov
 
 
 ## Screenshots
-![image](https://github.com/user-attachments/assets/7534c49d-72a0-49f8-8498-3017e79ec624)
-![image](https://github.com/user-attachments/assets/37729f84-35f3-456f-811f-325be4b70c54)
+<img width="1231" height="682" alt="image" src="https://github.com/user-attachments/assets/53e512a2-b56d-4f1d-b2b8-bc386a6bbc4f" />
+<img width="1131" height="624" alt="image" src="https://github.com/user-attachments/assets/14d54a4f-9e16-4654-b91c-af4c3814e922" />
+
 
 
 
